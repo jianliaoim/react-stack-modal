@@ -5,6 +5,7 @@ Immutable = require 'immutable'
 
 style = require '../style'
 
+Devtools = React.createFactory require('actions-recorder/lib/devtools')
 ModalStack = React.createFactory require '../../src/modal-stack'
 
 div = React.createFactory 'div'
@@ -15,6 +16,13 @@ module.exports = React.createClass
   propTypes:
     dispatch: React.PropTypes.func.isRequired
     store: React.PropTypes.instanceOf(Immutable.Map).isRequired
+    core: React.PropTypes.instanceOf(Immutable.Map).isRequired
+
+  getInitialState: ->
+    path: Immutable.List()
+
+  onPathChange: (path) ->
+    @setState path: path
 
   onModalA: ->
     @props.dispatch 'modal/add', name: 'a', id: shortid.generate()
@@ -49,6 +57,14 @@ module.exports = React.createClass
   render: ->
     modals = @props.store.get 'modalStack'
 
-    div className: 'app-page',
+    div className: 'app-page', style: style.layout.app,
       @renderControlPanel()
+      div style: style.layout.container,
+        Devtools
+          core: @props.core
+          language: 'en'
+          width: window?.innerWidth or 1000
+          height: window?.innerHeight or 400
+          path: @state.path
+          onPathChange: @onPathChange
       ModalStack renderer: @renderModalContent, modals: modals, onClose: @onModalClose, onEsc: @onModalEsc

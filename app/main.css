@@ -1,6 +1,6 @@
 
 body {
-  padding: 100px;
+  padding: 0px;
 }
 
 .demo {
@@ -10,7 +10,7 @@ body {
 .stack-modal,
 .stack-modal-box {
   transition-duration: 300ms;
-  transition-timing-function: ease-in;
+  transition-timing-function: ease-in-out;
 }
 
 .stack-modal-enter,

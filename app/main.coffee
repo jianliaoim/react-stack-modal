@@ -15,7 +15,7 @@ recorder.setup
 
 render = ->
   Page = React.createFactory require './component/page'
-  React.render Page(dispatch: recorder.dispatch, store: recorder.getStore()),
+  React.render Page(dispatch: recorder.dispatch, store: recorder.getStore(), core: recorder.getCore()),
     document.querySelector('.demo')
 
 render()

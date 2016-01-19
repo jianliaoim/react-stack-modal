@@ -23,7 +23,7 @@ module.exports = (data) ->
   stir.render stir.doctype(),
     html null,
       head null,
-        title null, "Coffee Webpack Starter"
+        title null, "React Stack Modal"
         meta charset: 'utf-8'
         link rel: 'icon', href: 'http://tp4.sinaimg.cn/5592259015/180/5725970590/1'
         if assetLinks.style?
@@ -32,12 +32,12 @@ module.exports = (data) ->
         script src: assetLinks.main, defer: true
       body null,
         div class: 'intro',
-          div class: 'title', "This is a demo of Webpack usage."
-          div class: 'line', "Open Console to see how it loads."
+          div class: 'title', "This is a demo of Stack Modal."
+          div class: 'line', "Click the buttons to try"
           div null,
             span null, "Read more at "
-            a href: 'http://github.com/teambition/coffee-webpack-starter',
-              'github.com/teambition/coffee-webpack-starter'
+            a href: 'http://github.com/jianliaoim/react-stack-modal',
+              'github.com/jianliaoim/react-stack-modal'
             span null, '.'
         div class: 'demo',
-          React.renderToString Page(dispatch: recorder.dispatch, store: recorder.getStore())
+          React.renderToString Page(dispatch: recorder.dispatch, store: recorder.getStore(), core: recorder.getCore())
