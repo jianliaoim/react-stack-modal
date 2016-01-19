@@ -1,0 +1,53 @@
+
+body {
+  padding: 100px;
+}
+
+.demo {
+  display: flex;
+}
+
+.stack-modal,
+.stack-modal-box {
+  transition-duration: 300ms;
+  transition-timing-function: ease-in;
+}
+
+.stack-modal-enter,
+.stack-modal-leave.stack-modal-leave-active {
+  opacity: 0.01;
+}
+
+.stack-modal-enter.stack-modal-enter-active {
+  opacity: 1;
+}
+
+.stack-modal-enter .stack-modal-box,
+.stack-modal-leave.stack-modal-leave-active .stack-modal-box {
+  transform: translate(0, -100px);
+}
+
+.stack-modal-leave .stack-modal-box,
+.stack-modal-enter.stack-modal-enter-active .stack-modal-box {
+  transform: translate(0, 0);
+}
+
+.stack-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: hsla(0,20%,40%,0.8);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.stack-modal .stack-modal-box {
+  width: 400px;
+  min-height: 200px;
+  background-color: white;
+}
