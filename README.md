@@ -4,6 +4,8 @@ React Stack Modal
 
 Demo http://ui.talk.ai/react-stack-modal
 
+`autoFocus: true` may break entering transition, add requestAnimation frame to by pass.
+
 ### Develop
 
 You need a static file server for the HTML files. Personally I suggest using Nginx.

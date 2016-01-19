@@ -1,10 +1,9 @@
 {
-  "name": "coffee-webpack-starter",
-  "version": "0.0.1",
+  "name": "react-stack-modal",
+  "version": "0.2.0",
   "description": "Component starter kit for Talk by Teambition",
-  "main": "lib/index.js",
+  "main": "lib/modal-stack.js",
   "dependencies": {
-    "classnames": "^1.2.0",
     "react": "^0.13.1"
   },
   "devDependencies": {
@@ -47,10 +46,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/teambition/coffee-webpack-starter.git"
+    "url": "https://github.com/jianliaoim/react-stack-modal.git"
   },
   "bugs": {
-    "url": "https://github.com/teambition/coffee-webpack-starter/issues"
+    "url": "https://github.com/jianliaoim/react-stack-modal/issues"
   },
-  "homepage": "https://github.com/teambition/coffee-webpack-starter"
+  "homepage": "https://github.com/jianliaoim/react-stack-modal"
 }

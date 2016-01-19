@@ -11,6 +11,9 @@ module.exports = React.createClass
     renderer: React.PropTypes.func.isRequired
     data: React.PropTypes.any.isRequired
 
+  getName: ->
+    @props.data.get?('name') or @props.data.name
+
   onClose: (event) ->
     @props.onClose event
 
@@ -18,6 +21,8 @@ module.exports = React.createClass
     event.stopPropagation()
 
   render: ->
-    div className: 'stack-modal', onClick: @onClose,
+    name = @getName()
+
+    div className: "stack-modal as-#{name}", onClick: @onClose,
       div className: 'stack-modal-box', onClick: @onBoxClick,
         @props.renderer @props.data, @onClose
