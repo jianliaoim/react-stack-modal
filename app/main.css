@@ -7,28 +7,30 @@ body {
   display: flex;
 }
 
+/* style for the modal */
+
 .stack-modal,
 .stack-modal-box {
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
 }
 
-.stack-modal-enter,
-.stack-modal-leave.stack-modal-leave-active {
+.stack-modal.stack-enter,
+.stack-modal.stack-leave.stack-leave-active {
   opacity: 0.01;
 }
 
-.stack-modal-enter.stack-modal-enter-active {
+.stack-modal.stack-enter.stack-enter-active {
   opacity: 1;
 }
 
-.stack-modal-enter .stack-modal-box,
-.stack-modal-leave.stack-modal-leave-active .stack-modal-box {
+.stack-modal.stack-enter .stack-modal-box,
+.stack-modal.stack-leave.stack-leave-active .stack-modal-box {
   transform: translate(0, -100px);
 }
 
-.stack-modal-leave .stack-modal-box,
-.stack-modal-enter.stack-modal-enter-active .stack-modal-box {
+.stack-modal.stack-leave .stack-modal-box,
+.stack-modal.stack-enter.stack-enter-active .stack-modal-box {
   transform: translate(0, 0);
 }
 
@@ -51,3 +53,29 @@ body {
   min-height: 200px;
   background-color: white;
 }
+
+/* style the popover */
+
+.stack-popover {
+  position: absolute;
+  border-radius: 3px;
+  border: 1px solid #eee;
+  background-color: white;
+  box-shadow: 0 7px 21px rgba(0, 0, 0, 0.1);
+}
+
+.stack-popover {
+  transition-duration: 100ms;
+  transition-timing-function: ease-in-out;
+}
+
+.stack-popover.stack-enter,
+.stack-popover.stack-leave.stack-leave-active {
+  opacity: 0.01;
+}
+
+.stack-popover.stack-enter.stack-enter-active {
+  opacity: 1;
+}
+
+/* style overlay */

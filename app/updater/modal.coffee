@@ -6,6 +6,8 @@ exports.add = (store, data) ->
     newModal = schema.modal
     .set 'id', data.get('id')
     .set 'name', data.get('name')
+    .set 'type', data.get('type')
+    .set 'position', data.get('position')
     .set 'data', data.get('data')
     modalStack.push newModal
 

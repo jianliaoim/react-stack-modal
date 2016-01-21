@@ -8,3 +8,4 @@ exports.modal = Immutable.fromJS
   id: null
   name: null
   data: {}
+  type: null
