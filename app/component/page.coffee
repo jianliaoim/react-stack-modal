@@ -44,8 +44,8 @@ module.exports = React.createClass
     @props.dispatch 'modal/add',
       name: 'a', id: shortid.generate(), type: 'popover'
       position:
-        top: '40px'
-        left: '40px'
+        top: (window.innerHeight / 2) + (Math.random() - 1) * 400
+        left: (window.innerWidth / 2) + (Math.random() - 1) * 600
 
   onModalClose: (modal) ->
     @props.dispatch 'modal/remove', modal.get('id')

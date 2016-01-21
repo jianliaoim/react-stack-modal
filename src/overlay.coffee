@@ -27,5 +27,5 @@ module.exports = React.createClass
     name = @getName()
 
     div className: "stack-overlay as-#{name}", onClick: @onClick,
-      div className: "stack-overlay", onClick: @onBoxClick,
+      div className: "stack-overlay-box", onClick: @onBoxClick,
         @props.renderer @props.data, @onClose

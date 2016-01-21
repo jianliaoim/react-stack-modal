@@ -9,9 +9,14 @@ exports.add = (store, data) ->
     .set 'type', data.get('type')
     .set 'position', data.get('position')
     .set 'data', data.get('data')
-    modalStack.push newModal
+
+    if (modalStack.size > 0) and modalStack.last().get('type') is 'popover'
+      modalStack.butLast().push newModal
+    else
+      modalStack.push newModal
 
 exports.remove = (store, data) ->
   store.update 'modalStack', (modalStack) ->
-    modalStack.filterNot (modal) ->
+    index = modalStack.findIndex (modal) ->
       modal.get('id') is data
+    modalStack.slice 0, index

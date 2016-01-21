@@ -94,7 +94,8 @@ body {
   align-items: center;
 }
 
-.stack-overlay {
+.stack-overlay,
+.stack-overlay-box {
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
 }
@@ -107,4 +108,14 @@ body {
 .stack-overlay.stack-leave,
 .stack-overlay.stack-enter.stack-enter-active {
   opacity: 1;
+}
+
+.stack-overlay.stack-enter .stack-overlay-box,
+.stack-overlay.stack-leave.stack-leave-active .stack-overlay-box {
+  transform: scale(0.7);
+}
+
+.stack-overlay.stack-leave .stack-overlay-box,
+.stack-overlay.stack-enter.stack-enter-active .stack-overlay-box {
+  transform: scale(1);
 }
