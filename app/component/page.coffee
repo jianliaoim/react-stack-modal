@@ -65,11 +65,19 @@ module.exports = React.createClass
   onDevToolsClick: (event) ->
     event.stopPropagation()
 
+  onOverlayA: (event) ->
+    event.stopPropagation()
+    @props.dispatch 'modal/add', name: 'overlay a', id: shortid.generate(), type: 'overlay'
+
   renderControlPanel: ->
-    div {},
+    div style: style.layout.panel,
+      div style: style.widget.header, 'Modal buttons'
       div style: style.widget.button, onClick: @onModalA, 'Open modal A'
       div style: style.widget.button, onClick: @onModalB, 'Open modal B'
+      div style: style.widget.header, 'Popover buttons'
       div style: style.widget.button, onClick: @onPopoverA, 'Open popover A'
+      div style: style.widget.header, 'Overlay buttons'
+      div style: style.widget.button, onClick: @onOverlayA, 'Open overlay A'
 
   renderModalContent: (data, onClose) ->
     switch data.get('name')
@@ -82,6 +90,8 @@ module.exports = React.createClass
         div {},
           'inside modal B!'
           @renderControlPanel()
+      when 'overlay a'
+        @renderControlPanel()
 
   renderDevTools: ->
     div style: style.layout.container, onClick: @onDevToolsClick,
@@ -97,8 +107,8 @@ module.exports = React.createClass
     modals = @props.store.get 'modalStack'
 
     div className: 'app-page', style: style.layout.app,
-      @renderControlPanel()
       div null, 'Press `Command + Shift + A` to toggle debugger'
+      @renderControlPanel()
       ModalStack
         renderer: @renderModalContent, modals: modals, onClose: @onModalClose
         onEsc: @onModalEsc, onWindowClick: @onWindowClick

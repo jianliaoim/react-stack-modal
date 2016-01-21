@@ -54,10 +54,11 @@ module.exports = React.createClass
         leaveTimeout: @props.timeout
         @props.modals.map (modal, index) =>
           onClose = => @onClose modal
+          id = modal.get?('id') or modal.id
           switch @getType(modal)
             when 'modal'
-              Modal data: modal, onClose: onClose, renderer: @props.renderer, key: index
+              Modal data: modal, onClose: onClose, renderer: @props.renderer, key: id
             when 'popover'
-              Popover data: modal, onClose: onClose, renderer: @props.renderer, key: index
+              Popover data: modal, onClose: onClose, renderer: @props.renderer, key: id
             when 'overlay'
-              Overlay data: modal, onClose: onClose, renderer: @props.renderer, key: index
+              Overlay data: modal, onClose: onClose, renderer: @props.renderer, key: id

@@ -79,3 +79,32 @@ body {
 }
 
 /* style overlay */
+
+.stack-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: hsla(0,0%,0%,0.7);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.stack-overlay {
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+}
+
+.stack-overlay.stack-enter,
+.stack-overlay.stack-leave.stack-leave-active {
+  opacity: 0.01;
+}
+
+.stack-overlay.stack-leave,
+.stack-overlay.stack-enter.stack-enter-active {
+  opacity: 1;
+}
