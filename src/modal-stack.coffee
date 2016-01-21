@@ -29,12 +29,15 @@ module.exports = React.createClass
   onClose: (modal) ->
     @props.onClose modal
 
+  onClick: (event) ->
+    event.stopPropagation()
+
   onWindowKeydown: (event) ->
     if (event.keyCode is 27)
       @props.onEsc @props.modals, event
 
   render: ->
-    div className: 'modal-stack',
+    div className: 'modal-stack', onClick: @onClick,
       Transition
         transitionName: 'stack-modal'
         enterTimeout: @props.timeout
