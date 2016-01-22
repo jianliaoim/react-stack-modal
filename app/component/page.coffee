@@ -19,16 +19,33 @@ module.exports = React.createClass
     core: React.PropTypes.instanceOf(Immutable.Map).isRequired
 
   getInitialState: ->
+    showDevTools: false
     path: Immutable.List()
+
+  componentDidMount: ->
+    window.addEventListener 'keydown', @onWindowKeydown
+
+  componentWillUnmount: ->
+    window.removeEventListener 'keydown', @onWindowKeydown
 
   onPathChange: (path) ->
     @setState path: path
 
-  onModalA: ->
+  onModalA: (event) ->
+    event.stopPropagation()
     @props.dispatch 'modal/add', name: 'a', id: shortid.generate()
 
-  onModalB: ->
+  onModalB: (event) ->
+    event.stopPropagation()
     @props.dispatch 'modal/add', name: 'b', id: shortid.generate()
+
+  onPopoverA: (event) ->
+    event.stopPropagation()
+    @props.dispatch 'modal/add',
+      name: 'a', id: shortid.generate(), type: 'popover'
+      position:
+        top: (window.innerHeight / 2) + (Math.random() - 1) * 400
+        left: (window.innerWidth / 2) + (Math.random() - 1) * 600
 
   onModalClose: (modal) ->
     @props.dispatch 'modal/remove', modal.get('id')
@@ -37,10 +54,33 @@ module.exports = React.createClass
     if modals.size > 0
       @props.dispatch 'modal/remove', modals.last().get('id')
 
+  onWindowClick: (modals, event) ->
+    if modals.size > 0
+      @props.dispatch 'modal/remove', modals.last().get('id')
+
+  onWindowKeydown: (event) ->
+    if event.metaKey and event.shiftKey and event.key is 'a'
+      @setState showDevTools: (not @state.showDevTools)
+
+  onDevToolsClick: (event) ->
+    event.stopPropagation()
+
+  onOverlayA: (event) ->
+    event.stopPropagation()
+    @props.dispatch 'modal/add', name: 'overlay a', id: shortid.generate(), type: 'overlay'
+
+  onModalContentClick: (modal, event) ->
+    @props.dispatch 'modal/content-click', modal.get('id')
+
   renderControlPanel: ->
-    div {},
+    div style: style.layout.panel,
+      div style: style.widget.header, 'Modal buttons'
       div style: style.widget.button, onClick: @onModalA, 'Open modal A'
       div style: style.widget.button, onClick: @onModalB, 'Open modal B'
+      div style: style.widget.header, 'Popover buttons'
+      div style: style.widget.button, onClick: @onPopoverA, 'Open popover A'
+      div style: style.widget.header, 'Overlay buttons'
+      div style: style.widget.button, onClick: @onOverlayA, 'Open overlay A'
 
   renderModalContent: (data, onClose) ->
     switch data.get('name')
@@ -53,18 +93,28 @@ module.exports = React.createClass
         div {},
           'inside modal B!'
           @renderControlPanel()
+      when 'overlay a'
+        @renderControlPanel()
+
+  renderDevTools: ->
+    div style: style.layout.container, onClick: @onDevToolsClick,
+      Devtools
+        core: @props.core
+        language: 'en'
+        width: window?.innerWidth or 1000
+        height: window?.innerHeight or 400
+        path: @state.path
+        onPathChange: @onPathChange
 
   render: ->
     modals = @props.store.get 'modalStack'
 
     div className: 'app-page', style: style.layout.app,
+      div null, 'Press `Command + Shift + A` to toggle debugger'
       @renderControlPanel()
-      div style: style.layout.container,
-        Devtools
-          core: @props.core
-          language: 'en'
-          width: window?.innerWidth or 1000
-          height: window?.innerHeight or 400
-          path: @state.path
-          onPathChange: @onPathChange
-      ModalStack renderer: @renderModalContent, modals: modals, onClose: @onModalClose, onEsc: @onModalEsc
+      ModalStack
+        renderer: @renderModalContent, modals: modals, onClose: @onModalClose
+        onEsc: @onModalEsc, onWindowClick: @onWindowClick
+        onContentClick: @onModalContentClick
+      if @state.showDevTools
+        @renderDevTools()

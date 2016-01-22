@@ -10,3 +10,9 @@ exports.button =
   borderRadius: 15
   lineHeight: '30px'
   cursor: 'pointer'
+
+exports.header =
+  fontWeight: 'bold'
+  fontSize: '24px'
+  marginTop: 40
+  marginBottom: 20

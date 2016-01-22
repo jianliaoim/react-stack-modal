@@ -4,7 +4,7 @@ React = require 'react'
 {div} = React.DOM
 
 module.exports = React.createClass
-  displayName: 'stack-modal'
+  displayName: 'stack-overlay'
 
   propTypes:
     onClose: React.PropTypes.func.isRequired
@@ -18,13 +18,16 @@ module.exports = React.createClass
   onClose: (event) ->
     @props.onClose event
 
-  onBoxClick: (event) ->
+  onClick: (event) ->
     @props.onContentClick @props.data, event
     event.stopPropagation()
+
+  onBoxClick: (event) ->
+    @props.onClose()
 
   render: ->
     name = @getName()
 
-    div className: "stack-modal as-#{name}", onClick: @onClose,
-      div className: 'stack-modal-box', onClick: @onBoxClick,
+    div className: "stack-overlay as-#{name}", onClick: @onClick,
+      div className: "stack-overlay-box", onClick: @onBoxClick,
         @props.renderer @props.data, @onClose
