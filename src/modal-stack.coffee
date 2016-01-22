@@ -46,6 +46,9 @@ module.exports = React.createClass
   onWindowClick: (event) ->
     @props.onWindowClick @props.modals, event
 
+  onContentClick: (modal, event) ->
+    @props.onContentClick modal, event
+
   render: ->
     div className: 'modal-stack', onClick: @onClick,
       Transition
@@ -57,8 +60,8 @@ module.exports = React.createClass
           id = modal.get?('id') or modal.id
           switch @getType(modal)
             when 'modal'
-              Modal data: modal, onClose: onClose, renderer: @props.renderer, key: id
+              Modal data: modal, onClose: onClose, renderer: @props.renderer, key: id, onContentClick: @onContentClick
             when 'popover'
               Popover data: modal, onClose: onClose, renderer: @props.renderer, key: id
             when 'overlay'
-              Overlay data: modal, onClose: onClose, renderer: @props.renderer, key: id
+              Overlay data: modal, onClose: onClose, renderer: @props.renderer, key: id, onContentClick: @onContentClick

@@ -10,6 +10,7 @@ module.exports = React.createClass
     onClose: React.PropTypes.func.isRequired
     renderer: React.PropTypes.func.isRequired
     data: React.PropTypes.any.isRequired
+    onContentClick: React.PropTypes.func.isRequired
 
   getName: ->
     @props.data.get?('name') or @props.data.name
@@ -18,6 +19,7 @@ module.exports = React.createClass
     @props.onClose event
 
   onClick: (event) ->
+    @props.onContentClick @props.data, event
     event.stopPropagation()
 
   onBoxClick: (event) ->

@@ -1,4 +1,6 @@
 
+Immutable = require 'immutable'
+
 schema = require '../schema'
 
 exports.add = (store, data) ->
@@ -20,3 +22,23 @@ exports.remove = (store, data) ->
     index = modalStack.findIndex (modal) ->
       modal.get('id') is data
     modalStack.slice 0, index
+
+clearPopoverAfter = (acc, modalStack, id, isFound) ->
+  if modalStack.size is 0
+    acc
+  else
+    cursor = modalStack.first()
+    if isFound
+      if cursor.get('type') is 'popover'
+        clearPopoverAfter acc, modalStack.rest(), id, true
+      else
+        clearPopoverAfter acc.push(cursor), modalStack.rest(), id, true
+    else
+      if cursor.get('id') is id
+        clearPopoverAfter acc.push(cursor), modalStack.rest(), id, true
+      else
+        clearPopoverAfter acc.push(cursor), modalStack.rest(), id, false
+
+exports.contentClick = (store, id) ->
+  store.update 'modalStack', (modalStack) ->
+    clearPopoverAfter Immutable.List(), modalStack, id, false

@@ -69,6 +69,9 @@ module.exports = React.createClass
     event.stopPropagation()
     @props.dispatch 'modal/add', name: 'overlay a', id: shortid.generate(), type: 'overlay'
 
+  onModalContentClick: (modal, event) ->
+    @props.dispatch 'modal/content-click', modal.get('id')
+
   renderControlPanel: ->
     div style: style.layout.panel,
       div style: style.widget.header, 'Modal buttons'
@@ -112,5 +115,6 @@ module.exports = React.createClass
       ModalStack
         renderer: @renderModalContent, modals: modals, onClose: @onModalClose
         onEsc: @onModalEsc, onWindowClick: @onWindowClick
+        onContentClick: @onModalContentClick
       if @state.showDevTools
         @renderDevTools()
