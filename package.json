@@ -1,6 +1,6 @@
 {
   "name": "react-stack-modal",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Component starter kit for Talk by Teambition",
   "main": "lib/modal-stack.js",
   "dependencies": {
