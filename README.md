@@ -1,5 +1,5 @@
 
-React Stack Modal
+React Stack Modal(WIP)
 ----
 
 Demo http://ui.talk.ai/react-stack-modal
@@ -8,22 +8,9 @@ Demo http://ui.talk.ai/react-stack-modal
 
 ### Develop
 
-You need a static file server for the HTML files. Personally I suggest using Nginx.
+Project template:
 
-```bash
-npm i
-gulp dev
-```
-
-Build (Pack and optimize assets, add hashes and put entries in `index.html`):
-
-```bash
-NODE_ENV=static gulp build # not minified
-npm run static
-
-NODE_ENV=ws gulp build
-npm run ws
-```
+https://github.com/teambition/coffee-webpack-starter
 
 ### License
 

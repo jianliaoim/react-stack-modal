@@ -44,6 +44,9 @@ module.exports = React.createClass
       @props.onEsc @props.modals, event
 
   onWindowClick: (event) ->
+    if event.target is window
+      # events mocked by lite-dropdown, lite-popover, don't respond
+      return
     @props.onWindowClick @props.modals, event
 
   onContentClick: (modal, event) ->
